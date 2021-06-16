@@ -5,7 +5,7 @@ import "time"
 type Main struct {
 	dig         *digger
 	digsprorder []int
-	gamedat     []game
+	gamedat     []*game
 	pldispbuf   string
 	curplayer   int
 	nplayers    int
@@ -24,7 +24,7 @@ func NewMain(d *digger) *Main {
 	rcvr := new(Main)
 
 	rcvr.digsprorder = []int{14, 13, 7, 6, 5, 4, 3, 2, 1, 12, 11, 10, 9, 8, 15, 0} // [16]
-	rcvr.gamedat = []game{NewGame(), NewGame()}
+	rcvr.gamedat = []*game{NewGame(), NewGame()}
 
 	rcvr.leveldat = [][]string{
 		{"S   B     HHHHS",

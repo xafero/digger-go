@@ -38,7 +38,7 @@ func ReadFromStorage(mem *Scores) bool {
 	}
 	defer fileIn.Close()
 	br := bufio.NewScanner(fileIn)
-	sc := make([]ScoreTuple, 10)
+	sc := make([]*ScoreTuple, 10)
 	for i := 0; i < 10; i++ {
 		br.Scan()
 		name := br.Text()

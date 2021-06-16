@@ -5,7 +5,9 @@ type ScoreTuple struct {
 	Value int
 }
 
-func NewScoreTuple(key string, value int) ScoreTuple {
-	d := ScoreTuple{key, value}
+func NewScoreTuple(key string, value int) *ScoreTuple {
+	d := new(ScoreTuple)
+	d.Key = key
+	d.Value = value
 	return d
 }
