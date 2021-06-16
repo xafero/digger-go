@@ -2,7 +2,6 @@ package diggerclassic
 
 import (
 	"fmt"
-	"strings"
 	"time"
 )
 
@@ -217,15 +216,9 @@ func (rcvr *Scores) getinitials() {
 		}
 		if k != 0 {
 			rcvr.dig.Pc.gwrite(i*24+128, 130, k, 3, true)
-			var sb strings.Builder
-			for w := 0; w < len(rcvr.scoreinit[0]); w++ {
-				if w == i {
-					sb.WriteRune(rune(k))
-				} else {
-					sb.WriteByte(rcvr.scoreinit[0][i])
-				}
-			}
-			rcvr.scoreinit[0] = sb.String()
+			chars := []rune(rcvr.scoreinit[0])
+			chars[i] = rune(k)
+			rcvr.scoreinit[0] = string(chars)
 		}
 	}
 	rcvr.dig.Input.keypressed = 0
