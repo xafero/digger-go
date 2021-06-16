@@ -7,7 +7,7 @@ type game struct {
 	levdone bool
 }
 
-func NewGame() game {
-	d := game{}
+func NewGame() *game {
+	d := new(game)
 	return d
 }

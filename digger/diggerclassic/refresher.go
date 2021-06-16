@@ -17,13 +17,13 @@ func NewRefresher(area *gtk.DrawingArea, model *ColorModel) *Refresher {
 	return d
 }
 
-func (q Refresher) NewPixels(x int, y int, w int, h int) {
+func (q *Refresher) NewPixels(x int, y int, w int, h int) {
 	glib.TimeoutAdd(0, func() {
 		q.area.QueueDrawArea(x, y, w, h)
 	})
 }
 
-func (q Refresher) NewPixelsAll() {
+func (q *Refresher) NewPixelsAll() {
 	glib.TimeoutAdd(0, func() {
 		q.area.QueueDraw()
 	})

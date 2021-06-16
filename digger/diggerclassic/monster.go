@@ -20,7 +20,7 @@ type monsterdata struct {
 	alive bool
 }
 
-func NewMonsterData() monsterdata {
-	d := monsterdata{}
+func NewMonsterData() *monsterdata {
+	d := new(monsterdata)
 	return d
 }

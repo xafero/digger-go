@@ -4,7 +4,7 @@ import "math"
 
 type Monster struct {
 	dig           *digger
-	mondat        []monsterdata
+	mondat        []*monsterdata
 	nextmonster   int
 	totalmonsters int
 	maxmononscr   int
@@ -17,9 +17,8 @@ type Monster struct {
 func NewMonster(d *digger) *Monster {
 	rcvr := new(Monster)
 
-	rcvr.mondat = make([]monsterdata, 6)
-	for i := 0; i < len(rcvr.mondat); i++ {
-		rcvr.mondat[i] = NewMonsterData()
+	rcvr.mondat = []*monsterdata{NewMonsterData(), NewMonsterData(), NewMonsterData(),
+		NewMonsterData(), NewMonsterData(), NewMonsterData(),
 	}
 
 	rcvr.nextmonster = 0
