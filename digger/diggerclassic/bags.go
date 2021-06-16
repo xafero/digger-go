@@ -2,9 +2,9 @@ package diggerclassic
 
 type Bags struct {
 	dig       *digger
-	bagdat1   []bag
-	bagdat2   []bag
-	bagdat    []bag
+	bagdat1   []*bag
+	bagdat2   []*bag
+	bagdat    []*bag
 	pushcount int
 	goldtime  int
 	wblanim   []int
@@ -14,11 +14,11 @@ func NewBags(d *digger) *Bags {
 	rcvr := new(Bags)
 
 	rcvr.wblanim = []int{2, 0, 1, 0} // [4]
-	rcvr.bagdat1 = []bag{NewBag(), NewBag(), NewBag(), NewBag(),
+	rcvr.bagdat1 = []*bag{NewBag(), NewBag(), NewBag(), NewBag(),
 		NewBag(), NewBag(), NewBag(), NewBag()}
-	rcvr.bagdat2 = []bag{NewBag(), NewBag(), NewBag(), NewBag(),
+	rcvr.bagdat2 = []*bag{NewBag(), NewBag(), NewBag(), NewBag(),
 		NewBag(), NewBag(), NewBag(), NewBag()}
-	rcvr.bagdat = []bag{NewBag(), NewBag(), NewBag(), NewBag(),
+	rcvr.bagdat = []*bag{NewBag(), NewBag(), NewBag(), NewBag(),
 		NewBag(), NewBag(), NewBag(), NewBag()}
 
 	rcvr.pushcount = 0
