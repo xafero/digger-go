@@ -139,19 +139,19 @@ func NewDigger() *digger {
 	return rcvr
 }
 
-func (d digger) GetScores() *Scores {
+func (d *digger) GetScores() *Scores {
 	return d.Scores
 }
 
-func (d digger) GetMain() *Main {
+func (d *digger) GetMain() *Main {
 	return d.Main
 }
 
-func (d digger) SetFocusable(v bool) {
+func (d *digger) SetFocusable(v bool) {
 
 }
 
-func (rcvr digger) checkdiggerunderbag(h int, v int) bool {
+func (rcvr *digger) checkdiggerunderbag(h int, v int) bool {
 	if rcvr.digmdir == 2 || rcvr.digmdir == 6 {
 		if (rcvr.diggerx-12)/20 == h {
 			if (rcvr.diggery-18)/18 == v || (rcvr.diggery-18)/18+1 == v {
@@ -162,7 +162,7 @@ func (rcvr digger) checkdiggerunderbag(h int, v int) bool {
 	return false
 }
 
-func (q digger) countem() int {
+func (q *digger) countem() int {
 	var x int
 	var y int
 	n := 0
@@ -176,18 +176,18 @@ func (q digger) countem() int {
 	return n
 }
 
-func (rcvr digger) createbonus() {
+func (rcvr *digger) createbonus() {
 	rcvr.bonusvisible = true
 	rcvr.Drawing.drawbonus(292, 18)
 }
 
-func (rcvr digger) Destroy() {
+func (rcvr *digger) Destroy() {
 	if rcvr.gamethread != nil {
 		rcvr.gamethread.Terminate()
 	}
 }
 
-func (rcvr digger) diggerdie() {
+func (rcvr *digger) diggerdie() {
 	var clbits int
 	switch rcvr.deathstage {
 	case 1:
@@ -257,7 +257,7 @@ func (rcvr digger) diggerdie() {
 	}
 }
 
-func (rcvr digger) dodigger() {
+func (rcvr *digger) dodigger() {
 	rcvr.newframe()
 	if rcvr.expsn != 0 {
 		rcvr.drawexplosion()
@@ -324,7 +324,7 @@ func (rcvr digger) dodigger() {
 	}
 }
 
-func (q digger) drawemeralds() {
+func (q *digger) drawemeralds() {
 	var x int
 	var y int
 	q.emmask = 1 << q.Main.getcplayer()
@@ -337,7 +337,7 @@ func (q digger) drawemeralds() {
 	}
 }
 
-func (rcvr digger) drawexplosion() {
+func (rcvr *digger) drawexplosion() {
 	switch rcvr.expsn {
 	case 1:
 		rcvr.newSound.fireEnd()
@@ -356,12 +356,12 @@ func (rcvr digger) drawexplosion() {
 	}
 }
 
-func (rcvr digger) endbonusmode() {
+func (rcvr *digger) endbonusmode() {
 	rcvr.bonusmode = false
 	rcvr.Pc.ginten(0)
 }
 
-func (rcvr digger) erasebonus() {
+func (rcvr *digger) erasebonus() {
 	if rcvr.bonusvisible {
 		rcvr.bonusvisible = false
 		rcvr.Sprite.erasespr(14)
@@ -369,20 +369,20 @@ func (rcvr digger) erasebonus() {
 	rcvr.Pc.ginten(0)
 }
 
-func (rcvr digger) erasedigger() {
+func (rcvr *digger) erasedigger() {
 	rcvr.Sprite.erasespr(0)
 	rcvr.diggervisible = false
 }
 
-func (rcvr digger) GetAppletInfo() string {
+func (rcvr *digger) GetAppletInfo() string {
 	return "The Digger Remastered -- http://www.digger.org, Copyright (c) Andrew Jenner & Marek Futrega / MAF"
 }
 
-func (rcvr digger) getfirepflag() bool {
+func (rcvr *digger) getfirepflag() bool {
 	return rcvr.Input.firepflag
 }
 
-func (q digger) hitemerald(x int, y int, rx int, ry int, dir int) bool {
+func (q *digger) hitemerald(x int, y int, rx int, ry int, dir int) bool {
 	hit := false
 	var r int
 	if dir < 0 || dir > 6 || dir&1 != 0 {
