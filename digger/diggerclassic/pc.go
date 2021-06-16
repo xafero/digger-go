@@ -44,7 +44,7 @@ func (rcvr *Pc) gclear() {
 }
 
 func (rcvr *Pc) gethrt() int64 {
-	return time.Now().Unix()
+	return time.Now().UnixNano() / (int64(time.Millisecond) / int64(time.Nanosecond))
 }
 
 func (rcvr *Pc) getkips() int {

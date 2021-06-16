@@ -46,7 +46,8 @@ func NewScores(d *digger) *Scores {
 
 func (rcvr *Scores) _submit(n string, s int) []*ScoreTuple {
 	if len(rcvr.dig.subaddr) < 1 {
-		ms := 16 + (time.Now().Unix() % (65536 - 16))
+		now := time.Now().UnixNano() / (int64(time.Millisecond) / int64(time.Nanosecond))
+		ms := 16 + (now % (65536 - 16))
 		rcvr.substr = fmt.Sprintf("%v%v%v%v%v%v%v", n, '+', s, '+', ms, '+',
 			((ms+int64(32768))*int64(s))%65536)
 	}
