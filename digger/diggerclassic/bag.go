@@ -16,13 +16,13 @@ type bag struct {
 	exist    bool
 }
 
-func NewBag() bag {
-	d := bag{}
+func NewBag() *bag {
+	d := new(bag)
 	return d
 }
 
-func (t bag) copyFrom() bag {
-	d := bag{}
+func (t *bag) copyFrom() *bag {
+	d := new(bag)
 	d.x = t.x
 	d.y = t.y
 	d.h = t.h
