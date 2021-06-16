@@ -31,5 +31,5 @@ func GetSubmitParameter() string {
 }
 
 func GetSpeedParameter() int {
-	return 0
+	return 66
 }
