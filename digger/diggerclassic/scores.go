@@ -8,7 +8,7 @@ import (
 
 type Scores struct {
 	dig         *digger
-	scores      []ScoreTuple
+	scores      []*ScoreTuple
 	substr      string
 	highbuf     []rune
 	scorehigh   []int64
@@ -44,7 +44,7 @@ func NewScores(d *digger) *Scores {
 	return rcvr
 }
 
-func (rcvr *Scores) _submit(n string, s int) []ScoreTuple {
+func (rcvr *Scores) _submit(n string, s int) []*ScoreTuple {
 	if len(rcvr.dig.subaddr) < 1 {
 		ms := 16 + (time.Now().Unix() % (65536 - 16))
 		rcvr.substr = fmt.Sprintf("%v%v%v%v%v%v%v", n, '+', s, '+', ms, '+',
@@ -53,7 +53,7 @@ func (rcvr *Scores) _submit(n string, s int) []ScoreTuple {
 	return rcvr.scores
 }
 
-func (q *Scores) _updatescores(o []ScoreTuple) {
+func (q *Scores) _updatescores(o []*ScoreTuple) {
 	if o == nil {
 		return
 	}
