@@ -629,7 +629,7 @@ func (q digger) OnDrawn(da *gtk.DrawingArea, g *cairo.Context) bool {
 	return false
 }
 
-func (rcvr digger) updatedigger() {
+func (rcvr *digger) updatedigger() {
 	var dir int
 	var ddir int
 	var clbits int
@@ -719,7 +719,7 @@ func (rcvr digger) updatedigger() {
 	rcvr.diggerry = (rcvr.diggery - 18) % 18
 }
 
-func (rcvr digger) updatefire() {
+func (rcvr *digger) updatefire() {
 	var clbits int
 	var b int
 	var mon int
@@ -819,7 +819,7 @@ func (rcvr digger) updatefire() {
 	}
 }
 
-func (d digger) OnKeyPress(win *gtk.Window, ev *gdk.Event) {
+func (d *digger) OnKeyPress(win *gtk.Window, ev *gdk.Event) {
 	keyEvent := gdk.EventKey{ev}
 	num := ConvertToLegacy(keyEvent)
 	if num >= 0 {
@@ -827,7 +827,7 @@ func (d digger) OnKeyPress(win *gtk.Window, ev *gdk.Event) {
 	}
 }
 
-func (d digger) OnKeyRelease(win *gtk.Window, ev *gdk.Event) {
+func (d *digger) OnKeyRelease(win *gtk.Window, ev *gdk.Event) {
 	keyEvent := gdk.EventKey{ev}
 	num := ConvertToLegacy(keyEvent)
 	if num >= 0 {
