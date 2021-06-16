@@ -19,6 +19,13 @@ func FindResource(name string) string {
 }
 
 func LoadImage(file string) *gdk.Pixbuf {
-	img, _ := gdk.PixbufNewFromFile(file)
+	bytes, err := Asset(file)
+	if err != nil {
+		panic(err)
+	}
+	img, err := gdk.PixbufNewFromBytesOnly(bytes)
+	if err != nil {
+		panic(err)
+	}
 	return img
 }
