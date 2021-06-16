@@ -502,7 +502,7 @@ func (rcvr *digger) KeyDown(key int) bool {
 	return true
 }
 
-func (rcvr digger) KeyUp(key int) bool {
+func (rcvr *digger) KeyUp(key int) bool {
 	switch key {
 	case 1006:
 		rcvr.Input.processkey(0xcb)
@@ -530,7 +530,7 @@ func (rcvr digger) KeyUp(key int) bool {
 	return true
 }
 
-func (rcvr digger) killdigger(stage int, bag int) {
+func (rcvr *digger) killdigger(stage int, bag int) {
 	if rcvr.deathstage < 2 || rcvr.deathstage > 4 {
 		rcvr.newSound.stopNormalBackgroundMusic()
 		rcvr.newSound.stopBonusBackgroundMusic()
@@ -541,14 +541,14 @@ func (rcvr digger) killdigger(stage int, bag int) {
 	}
 }
 
-func (q digger) killemerald(x int, y int) {
+func (q *digger) killemerald(x int, y int) {
 	if (q.emfield[y*15+x+15] & byte(q.emmask)) != 0 {
 		q.emfield[y*15+x+15] = q.emfield[y*15+x+15] & byte(^q.emmask)
 		q.Drawing.eraseemerald(x*20+12, (y+1)*18+21)
 	}
 }
 
-func (rcvr digger) killfire() {
+func (rcvr *digger) killfire() {
 	if !rcvr.notfiring {
 		rcvr.notfiring = true
 		rcvr.Sprite.erasespr(15)
@@ -557,7 +557,7 @@ func (rcvr digger) killfire() {
 	}
 }
 
-func (q digger) makeemfield() {
+func (q *digger) makeemfield() {
 	var x int
 	var y int
 	q.emmask = 1 << q.Main.getcplayer()
@@ -572,7 +572,7 @@ func (q digger) makeemfield() {
 	}
 }
 
-func (rcvr digger) newframe() {
+func (rcvr *digger) newframe() {
 	rcvr.Input.checkkeyb()
 	rcvr.time += int64(rcvr.FrameTime)
 	l := rcvr.time - rcvr.Pc.gethrt()
@@ -582,7 +582,7 @@ func (rcvr digger) newframe() {
 	rcvr.Pc.currentSource.NewPixelsAll()
 }
 
-func (rcvr digger) reversedir(dir int) int {
+func (rcvr *digger) reversedir(dir int) int {
 	switch dir {
 	case 0:
 		return 4
@@ -599,7 +599,7 @@ func (rcvr digger) reversedir(dir int) int {
 	return dir
 }
 
-func (rcvr digger) Run() {
+func (rcvr *digger) Run() {
 	rcvr.Main.main()
 }
 
