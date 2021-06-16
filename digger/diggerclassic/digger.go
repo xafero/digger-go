@@ -604,7 +604,8 @@ func (rcvr digger) Run() {
 }
 
 func (rcvr digger) Start() {
-	// rcvr.RequestFocus();
+	rcvr.Control.SetCanFocus(true)
+	rcvr.Control.GrabFocus()
 }
 
 func (q digger) OnDrawn(da *gtk.DrawingArea, g *cairo.Context) bool {
