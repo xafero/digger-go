@@ -409,7 +409,7 @@ func (q digger) hitemerald(x int, y int, rx int, ry int, dir int) bool {
 			q.Drawing.eraseemerald(x*20+12, y*18+21)
 			q.Main.incpenalty()
 			hit = true
-			// emfield[y*15+x] = (byte) (emfield[y*15+x]&~emmask); // TODO
+			q.emfield[y*15+x] = q.emfield[y*15+x] & byte(^q.emmask)
 		}
 	}
 	return hit
@@ -542,11 +542,10 @@ func (rcvr digger) killdigger(stage int, bag int) {
 }
 
 func (q digger) killemerald(x int, y int) {
-	//if (q.emfield[y*15+x+15]&q.emmask)!=0 {
-	// emfield[y*15+x+15] = (byte) (emfield[y*15+x+15]&~emmask);
-	q.Drawing.eraseemerald(x*20+12, (y+1)*18+21)
-	//}
-	// TODO
+	if (q.emfield[y*15+x+15] & byte(q.emmask)) != 0 {
+		q.emfield[y*15+x+15] = q.emfield[y*15+x+15] & byte(^q.emmask)
+		q.Drawing.eraseemerald(x*20+12, (y+1)*18+21)
+	}
 }
 
 func (rcvr digger) killfire() {
@@ -565,9 +564,9 @@ func (q digger) makeemfield() {
 	for x = 0; x < 15; x++ {
 		for y = 0; y < 10; y++ {
 			if q.Main.getlevch(x, y, q.Main.levplan()) == 'C' {
-				// q.emfield[y*15+x] = (byte) (q.emfield[y*15+x]|q.emmask); // TODO
+				q.emfield[y*15+x] = q.emfield[y*15+x] | byte(q.emmask)
 			} else {
-				// emfield[y*15+x] = (byte) (emfield[y*15+x]&~emmask); // TODO
+				q.emfield[y*15+x] = q.emfield[y*15+x] & byte(^q.emmask)
 			}
 		}
 	}
