@@ -8,14 +8,6 @@ import (
 	"strconv"
 )
 
-type ScoreStorage struct {
-}
-
-func NewScoreStorage() ScoreStorage {
-	d := ScoreStorage{}
-	return d
-}
-
 func CreateInStorage(mem *Scores) {
 	WriteToStorage(mem)
 }

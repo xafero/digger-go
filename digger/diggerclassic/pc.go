@@ -150,7 +150,7 @@ func (rcvr *Pc) gputim(x int, y int, ch int, w int, h int) {
 func (rcvr *Pc) gtitle() {
 	src := 0
 	dest := 0
-	for true {
+	for {
 		if src >= len(cgatitledat) {
 			break
 		}

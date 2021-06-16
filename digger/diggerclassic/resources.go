@@ -8,14 +8,6 @@ import (
 	"github.com/gotk3/gotk3/gdk"
 )
 
-type Resources struct {
-}
-
-func NewResources() Resources {
-	d := Resources{}
-	return d
-}
-
 func FindResource(name string) string {
 	exe, err := os.Executable()
 	if err != nil {

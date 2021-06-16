@@ -2,7 +2,6 @@ package diggerclassic
 
 import (
 	"log"
-	"strconv"
 	"time"
 
 	"github.com/gotk3/gotk3/cairo"
@@ -18,7 +17,6 @@ type digger struct {
 	Width              int
 	Height             int
 	FrameTime          int
-	app                *AppletCompat
 	gamethread         thread.Thread
 	subaddr            string
 	Bags               *Bags
