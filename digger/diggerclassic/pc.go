@@ -28,7 +28,6 @@ func NewPc(d *digger) *Pc {
 	}
 	rcvr.pal = [][][]byte{palA, palB}
 
-	// rcvr.image = make([]*Image, 2)
 	rcvr.source = make([]*Refresher, 2)
 	rcvr.width = 320
 	rcvr.height = 200
@@ -79,7 +78,6 @@ func (rcvr *Pc) ginit() {
 
 func (q *Pc) ginten(inten int) {
 	q.currentSource = q.source[inten&1]
-	// q.currentImage = q.image[inten&1]
 	q.currentSource.NewPixelsAll()
 }
 

@@ -599,7 +599,7 @@ func (rcvr *Sound) soundint() {
 }
 
 func (rcvr *Sound) soundlevdone() {
-	// Thread.Sleep (1000);
+	/* Thread.Sleep (1000) */
 }
 
 func (rcvr *Sound) soundlevdoneoff() {

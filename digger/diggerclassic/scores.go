@@ -49,7 +49,6 @@ func (rcvr *Scores) _submit(n string, s int) []ScoreTuple {
 		ms := 16 + (time.Now().Unix() % (65536 - 16))
 		rcvr.substr = fmt.Sprintf("%v%v%v%v%v%v%v", n, '+', s, '+', ms, '+',
 			((ms+int64(32768))*int64(s))%65536)
-		// new Thread (this.run).Start ();
 	}
 	return rcvr.scores
 }

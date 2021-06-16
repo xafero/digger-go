@@ -136,7 +136,6 @@ func (rcvr *Input) detectjoy() {
 }
 
 func (rcvr *Input) getasciikey(make int) int {
-	//var k int
 	if make == ' ' || make >= 'a' && make <= 'z' || make >= '0' && make <= '9' {
 		return make
 	} else {
