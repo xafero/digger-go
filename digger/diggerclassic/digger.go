@@ -414,13 +414,14 @@ func (q *digger) hitemerald(x int, y int, rx int, ry int, dir int) bool {
 	return hit
 }
 
-func (rcvr digger) Init() {
+func (rcvr *digger) Init() {
 	if rcvr.gamethread != nil {
 		rcvr.gamethread.Terminate()
 	}
-	rcvr.subaddr = GetParameter("submit")
 
-	rcvr.FrameTime, _ = strconv.Atoi(GetParameter("speed"))
+	rcvr.subaddr = GetSubmitParameter()
+
+	rcvr.FrameTime = GetSpeedParameter()
 	if rcvr.FrameTime > MAX_RATE {
 		rcvr.FrameTime = MAX_RATE
 	} else if rcvr.FrameTime < MIN_RATE {
@@ -431,7 +432,7 @@ func (rcvr digger) Init() {
 
 	for i := 0; i < 2; i++ {
 		model := NewColorModel(8, 4, rcvr.Pc.pal[i][0], rcvr.Pc.pal[i][1], rcvr.Pc.pal[i][2])
-		rcvr.Pc.source[i] = NewRefresher(rcvr.Control, &model)
+		rcvr.Pc.source[i] = NewRefresher(rcvr.Control, model)
 		rcvr.Pc.source[i].NewPixelsAll()
 	}
 
@@ -441,7 +442,7 @@ func (rcvr digger) Init() {
 	rcvr.gamethread.CallNonBlock(rcvr.Run)
 }
 
-func (rcvr digger) initbonusmode() {
+func (rcvr *digger) initbonusmode() {
 	rcvr.bonusmode = true
 	rcvr.erasebonus()
 	rcvr.Pc.ginten(1)
@@ -450,7 +451,7 @@ func (rcvr digger) initbonusmode() {
 	rcvr.eatmsc = 1
 }
 
-func (rcvr digger) initdigger() {
+func (rcvr *digger) initdigger() {
 	rcvr.diggerv = 9
 	rcvr.digmdir = 4
 	rcvr.diggerh = 7
@@ -473,7 +474,7 @@ func (rcvr digger) initdigger() {
 	rcvr.rechargetime = 0
 }
 
-func (rcvr digger) KeyDown(key int) bool {
+func (rcvr *digger) KeyDown(key int) bool {
 	switch key {
 	case 1006:
 		rcvr.Input.processkey(0x4b)
