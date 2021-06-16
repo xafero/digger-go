@@ -497,8 +497,9 @@ func (rcvr *Main) testpause() {
 		rcvr.dig.Drawing.outtext2("PRESS ANY KEY", 80, 0, 1)
 		rcvr.dig.newframe()
 		rcvr.dig.Input.keypressed = 0
-		for true {
-			time.Sleep(time.Duration(50) * time.Millisecond)
+		for {
+			wait := time.Duration(50) * time.Millisecond
+			time.Sleep(wait)
 			if rcvr.dig.Input.keypressed != 0 {
 				break
 			}
