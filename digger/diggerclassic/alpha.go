@@ -566,11 +566,3 @@ var ascii2cga = [][]int16{ // [0x5f]
 	cgaletI, cgaletJ, cgaletK, cgaletL, cgaletM, cgaletN, cgaletO, /* ijklmno */
 	cgaletP, cgaletQ, cgaletR, cgaletS, cgaletT, cgaletU, cgaletV, /* pqrstuv */
 	cgaletW, cgaletX, cgaletY, cgaletZ, nil, nil, nil, nil} /* wxyz{|}~ */
-
-type alpha struct {
-}
-
-func NewAlpha() alpha {
-	d := alpha{}
-	return d
-}
