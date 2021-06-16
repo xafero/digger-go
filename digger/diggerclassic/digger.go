@@ -8,6 +8,7 @@ import (
 	"github.com/gotk3/gotk3/cairo"
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
+	"golang.design/x/thread"
 )
 
 var MAX_RATE = 200
@@ -18,7 +19,7 @@ type digger struct {
 	Height             int
 	FrameTime          int
 	app                *AppletCompat
-	gamethread         *Thread
+	gamethread         thread.Thread
 	subaddr            string
 	Bags               *Bags
 	Main               *Main
@@ -184,7 +185,7 @@ func (rcvr digger) createbonus() {
 
 func (rcvr digger) Destroy() {
 	if rcvr.gamethread != nil {
-		rcvr.gamethread.Stop()
+		rcvr.gamethread.Terminate()
 	}
 }
 
@@ -417,7 +418,7 @@ func (q digger) hitemerald(x int, y int, rx int, ry int, dir int) bool {
 
 func (rcvr digger) Init() {
 	if rcvr.gamethread != nil {
-		rcvr.gamethread.Stop()
+		rcvr.gamethread.Terminate()
 	}
 	rcvr.subaddr = GetParameter("submit")
 
@@ -438,8 +439,8 @@ func (rcvr digger) Init() {
 
 	rcvr.Pc.currentSource = rcvr.Pc.source[0]
 
-	rcvr.gamethread = NewThread(rcvr.Run)
-	rcvr.gamethread.Start()
+	rcvr.gamethread = thread.New()
+	rcvr.gamethread.CallNonBlock(rcvr.Run)
 }
 
 func (rcvr digger) initbonusmode() {
