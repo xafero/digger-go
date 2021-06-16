@@ -8,8 +8,8 @@ type ColorModel struct {
 	b    []byte
 }
 
-func NewColorModel(bits int, size int, r []byte, g []byte, b []byte) ColorModel {
-	q := ColorModel{}
+func NewColorModel(bits int, size int, r []byte, g []byte, b []byte) *ColorModel {
+	q := new(ColorModel)
 	q.bits = bits
 	q.size = size
 	q.r = r
@@ -18,9 +18,9 @@ func NewColorModel(bits int, size int, r []byte, g []byte, b []byte) ColorModel 
 	return q
 }
 
-func (q ColorModel) GetColor(index int) []float64 {
+func (q *ColorModel) GetColor(index int) (float64, float64, float64) {
 	r := float64(q.r[index])
 	g := float64(q.g[index])
 	b := float64(q.b[index])
-	return []float64{r, g, b}
+	return r, g, b
 }
