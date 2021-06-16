@@ -577,7 +577,8 @@ func (rcvr *digger) newframe() {
 	rcvr.time += int64(rcvr.FrameTime)
 	l := rcvr.time - rcvr.Pc.gethrt()
 	if l > 0 {
-		time.Sleep(time.Duration(l) * time.Millisecond)
+		wait := time.Duration(l) * time.Millisecond
+		time.Sleep(wait)
 	}
 	rcvr.Pc.currentSource.NewPixelsAll()
 }
@@ -608,7 +609,7 @@ func (rcvr digger) Start() {
 	rcvr.Control.GrabFocus()
 }
 
-func (q digger) OnDrawn(da *gtk.DrawingArea, g *cairo.Context) bool {
+func (q *digger) OnDrawn(da *gtk.DrawingArea, g *cairo.Context) bool {
 	g.Scale(4, 4)
 
 	var w = q.Pc.width
@@ -620,8 +621,8 @@ func (q digger) OnDrawn(da *gtk.DrawingArea, g *cairo.Context) bool {
 	for x := 0; x < w; x++ {
 		for y := 0; y < h; y++ {
 			arrayIndex := y*w + x
-			c := q.Pc.currentSource.model.GetColor(data[arrayIndex])
-			g.SetSourceRGB(c[0], c[1], c[2])
+			mr, mg, mb := q.Pc.currentSource.model.GetColor(data[arrayIndex])
+			g.SetSourceRGB(mr, mg, mb)
 			g.Rectangle(float64(x+shift), float64(y+shift), 1, 1)
 			g.Fill()
 		}
