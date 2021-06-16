@@ -2,14 +2,6 @@ package diggerclassic
 
 import "github.com/gotk3/gotk3/gdk"
 
-type AppletCompat struct {
-}
-
-func NewAppletCompat() AppletCompat {
-	d := AppletCompat{}
-	return d
-}
-
 func ConvertToLegacy(netCode gdk.EventKey) int {
 	numeric := netCode.KeyVal()
 	switch numeric {
@@ -38,6 +30,10 @@ func ConvertToLegacy(netCode gdk.EventKey) int {
 	return ascii
 }
 
-func GetParameter(name string) string {
+func GetSubmitParameter() string {
 	return " "
+}
+
+func GetSpeedParameter() int {
+	return 0
 }
