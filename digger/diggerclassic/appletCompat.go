@@ -5,17 +5,13 @@ import "github.com/gotk3/gotk3/gdk"
 func ConvertToLegacy(netCode gdk.EventKey) int {
 	numeric := netCode.KeyVal()
 	switch numeric {
-	case gdk.KEY_Left:
-	case gdk.KEY_leftarrow:
+	case gdk.KEY_Left, gdk.KEY_leftarrow:
 		return 1006
-	case gdk.KEY_Right:
-	case gdk.KEY_rightarrow:
+	case gdk.KEY_Right, gdk.KEY_rightarrow:
 		return 1007
-	case gdk.KEY_Up:
-	case gdk.KEY_uparrow:
+	case gdk.KEY_Up, gdk.KEY_uparrow:
 		return 1004
-	case gdk.KEY_Down:
-	case gdk.KEY_downarrow:
+	case gdk.KEY_Down, gdk.KEY_downarrow:
 		return 1005
 	case gdk.KEY_F1:
 		return 1008
