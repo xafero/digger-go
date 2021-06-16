@@ -27,10 +27,8 @@ func main() {
 	win.SetDefaultSize(int(float64(game.Width)*4.03), int(float64(game.Height)*4.15))
 	win.SetPosition(gtk.WIN_POS_CENTER)
 
-	err_icon := win.SetIconFromFile("./icons/digger.png")
-	if err_icon != nil {
-		log.Fatal("Unable to find icon:", err_icon)
-	}
+	icon := diggerclassic.LoadImage("icons/digger.png")
+	win.SetIcon(icon)
 
 	win.Add(game.Control)
 	win.ShowAll()
