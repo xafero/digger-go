@@ -609,28 +609,6 @@ func (rcvr digger) Start() {
 	rcvr.Control.GrabFocus()
 }
 
-func (q *digger) OnDrawn(da *gtk.DrawingArea, g *cairo.Context) bool {
-	g.Scale(4, 4)
-
-	var w = q.Pc.width
-	var h = q.Pc.height
-	var data = q.Pc.pixels
-
-	shift := 1
-
-	for x := 0; x < w; x++ {
-		for y := 0; y < h; y++ {
-			arrayIndex := y*w + x
-			mr, mg, mb := q.Pc.currentSource.model.GetColor(data[arrayIndex])
-			g.SetSourceRGB(mr, mg, mb)
-			g.Rectangle(float64(x+shift), float64(y+shift), 1, 1)
-			g.Fill()
-		}
-	}
-
-	return false
-}
-
 func (rcvr *digger) updatedigger() {
 	var dir int
 	var ddir int
