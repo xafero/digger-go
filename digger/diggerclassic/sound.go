@@ -1,7 +1,9 @@
 package diggerclassic
 
+import "github.com/xafero/digger-go/diggerapi"
+
 type Sound struct {
-	dig                  DiggerCore
+	dig                  diggerapi.DiggerCore
 	wavetype             int
 	t2val                int
 	t0val                int
@@ -73,7 +75,7 @@ type Sound struct {
 	int8flag             bool
 }
 
-func NewSoundObj(d DiggerCore) *Sound {
+func NewSoundObj(d diggerapi.DiggerCore) *Sound {
 	rcvr := new(Sound)
 
 	rcvr.newlevjingle = []int{0x8e8, 0x712, 0x5f2, 0x7f0, 0x6ac, 0x54c, 0x712, 0x5f2, 0x4b8, 0x474, 0x474} // [11]
@@ -415,7 +417,7 @@ func (rcvr *Sound) soundemerald(emocttime int) {
 			rcvr.emerfreq = 0x4b8
 		case 0x4b8:
 			rcvr.emerfreq = 0x474
-			rcvr.dig.GetScores().scoreoctave()
+			rcvr.dig.GetScores().DoScoreOctave()
 		case 0x474:
 			rcvr.emerfreq = 0x8e8
 		}
@@ -519,7 +521,7 @@ func (rcvr *Sound) soundfireupdate() {
 		if rcvr.soundfiren == 1 {
 			rcvr.soundfiren = 0
 			rcvr.soundfirevalue += rcvr.soundfirevalue / 55
-			rcvr.t2val = rcvr.soundfirevalue + rcvr.dig.GetMain().randno(int(rcvr.soundfirevalue)>>3)
+			rcvr.t2val = rcvr.soundfirevalue + rcvr.dig.GetMain().DoRandNo(int(rcvr.soundfirevalue)>>3)
 			if rcvr.soundfirevalue > 30000 {
 				rcvr.soundfireoff()
 			}
