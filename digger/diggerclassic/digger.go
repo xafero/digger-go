@@ -1,12 +1,9 @@
 package diggerclassic
 
 import (
-	"log"
 	"time"
 
-	"github.com/gotk3/gotk3/cairo"
-	"github.com/gotk3/gotk3/gdk"
-	"github.com/gotk3/gotk3/gtk"
+	"github.com/xafero/digger-go/diggerapi"
 	"golang.design/x/thread"
 )
 
@@ -62,10 +59,11 @@ type digger struct {
 	ftime              int64
 	embox              []int
 	deatharc           []int
-	Control            *gtk.DrawingArea
+	Control            diggerapi.DrawingCore
+	Factory            diggerapi.SourceCreator
 }
 
-func NewDigger() *digger {
+func NewDigger(factory diggerapi.SourceCreator) *digger {
 	rcvr := new(digger)
 
 	rcvr.Width = 320
@@ -127,24 +125,22 @@ func NewDigger() *digger {
 	rcvr.Input = NewInput(rcvr)
 	rcvr.Pc = NewPc(rcvr)
 
-	// Custom drawing area
-	ctrl, cerr := gtk.DrawingAreaNew()
-	if cerr != nil {
-		log.Fatal("Unable to create area:", cerr)
-	}
-
-	rcvr.Control = ctrl
-	rcvr.Control.Connect("draw", rcvr.OnDrawn)
+	rcvr.Factory = factory
+	rcvr.Control = rcvr.Factory.CreateControl(rcvr)
 
 	return rcvr
 }
 
-func (d *digger) GetScores() *Scores {
+func (d *digger) GetScores() diggerapi.ScoresCore {
 	return d.Scores
 }
 
-func (d *digger) GetMain() *Main {
+func (d *digger) GetMain() diggerapi.MainCore {
 	return d.Main
+}
+
+func (d *digger) GetPc() diggerapi.PcRender {
+	return d.Pc
 }
 
 func (d *digger) SetFocusable(v bool) {
@@ -431,8 +427,8 @@ func (rcvr *digger) Init() {
 	rcvr.Pc.pixels = make([]int, 65536)
 
 	for i := 0; i < 2; i++ {
-		model := NewColorModel(8, 4, rcvr.Pc.pal[i][0], rcvr.Pc.pal[i][1], rcvr.Pc.pal[i][2])
-		rcvr.Pc.source[i] = NewRefresher(rcvr.Control, model)
+		model := diggerapi.NewColorModel(8, 4, rcvr.Pc.pal[i][0], rcvr.Pc.pal[i][1], rcvr.Pc.pal[i][2])
+		rcvr.Pc.source[i] = rcvr.Factory.CreateSource(rcvr.Control, model)
 		rcvr.Pc.source[i].NewPixelsAll()
 	}
 
@@ -796,21 +792,5 @@ func (rcvr *digger) updatefire() {
 				rcvr.Drawing.drawfire(rcvr.firex, rcvr.firey, 0)
 			}
 		}
-	}
-}
-
-func (d *digger) OnKeyPress(win *gtk.Window, ev *gdk.Event) {
-	keyEvent := gdk.EventKey{ev}
-	num := ConvertToLegacy(keyEvent)
-	if num >= 0 {
-		d.KeyDown(num)
-	}
-}
-
-func (d *digger) OnKeyRelease(win *gtk.Window, ev *gdk.Event) {
-	keyEvent := gdk.EventKey{ev}
-	num := ConvertToLegacy(keyEvent)
-	if num >= 0 {
-		d.KeyUp(num)
 	}
 }
