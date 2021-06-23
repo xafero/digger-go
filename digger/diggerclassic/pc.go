@@ -1,11 +1,15 @@
 package diggerclassic
 
-import "time"
+import (
+	"time"
+
+	"github.com/xafero/digger-go/diggerapi"
+)
 
 type Pc struct {
 	dig           *digger
-	source        []*Refresher
-	currentSource *Refresher
+	source        []diggerapi.Refresher
+	currentSource diggerapi.Refresher
 	width         int
 	height        int
 	size          int
@@ -28,7 +32,7 @@ func NewPc(d *digger) *Pc {
 	}
 	rcvr.pal = [][][]byte{palA, palB}
 
-	rcvr.source = make([]*Refresher, 2)
+	rcvr.source = make([]diggerapi.Refresher, 2)
 	rcvr.width = 320
 	rcvr.height = 200
 	rcvr.size = rcvr.width * rcvr.height
@@ -235,4 +239,20 @@ func (rcvr *Pc) gwrite(x int, y int, ch int, c int, upd bool) {
 
 func (rcvr *Pc) gwrite2(x int, y int, ch int, c int) {
 	rcvr.gwrite(x, y, ch, c, false)
+}
+
+func (q *Pc) GetWidth() int {
+	return q.width
+}
+
+func (q *Pc) GetHeight() int {
+	return q.height
+}
+
+func (q *Pc) GetPixels() []int {
+	return q.pixels
+}
+
+func (q *Pc) GetCurrentSource() diggerapi.Refresher {
+	return q.currentSource
 }
