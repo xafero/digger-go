@@ -1,4 +1,4 @@
-package diggerclassic
+package diggerapi
 
 type ColorModel struct {
 	bits int
