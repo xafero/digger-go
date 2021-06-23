@@ -308,6 +308,10 @@ func (rcvr *Scores) scoreoctave() {
 	rcvr.addscore(250)
 }
 
+func (q *Scores) DoScoreOctave() {
+	q.scoreoctave()
+}
+
 func (q *Scores) showtable() {
 	var i int
 	var col int

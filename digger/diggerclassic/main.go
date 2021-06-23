@@ -464,6 +464,10 @@ func (rcvr *Main) play() {
 	}
 }
 
+func (q *Main) DoRandNo(n int) int {
+	return q.randno(n)
+}
+
 func (rcvr *Main) randno(n int) int {
 	rcvr.randv = rcvr.randv*0x15a4e35 + 1
 	return rcvr.randv & 0x7fffffff % n
