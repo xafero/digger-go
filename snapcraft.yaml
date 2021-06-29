@@ -7,16 +7,14 @@ version: '1.0'
 confinement: strict
 
 apps:
-  digger:
-    command: digger
+  digger-classic:
+    command: digger-classic
 
 parts:
   digger:
     plugin: go
     go-importpath: github.com/xafero/digger-go
     source: ./digger
-    source-type: git
-
 
 plugs:
   digger-home:
