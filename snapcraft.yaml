@@ -13,7 +13,10 @@ apps:
 parts:
   digger:
     plugin: go
+    go-importpath: github.com/xafero/digger-go
     source: ./digger
+    source-type: git
+
 
 plugs:
   digger-home:
