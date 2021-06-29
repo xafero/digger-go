@@ -9,13 +9,15 @@ confinement: strict
 
 apps:
   digger-classic:
-    command: digger-classic
+    command: digger-go
+    extensions: [gnome-3-28]
 
 parts:
   digger:
     plugin: go
     go-importpath: github.com/xafero/digger-go
     source: ./digger
+    go-buildtags: [ pango_1_42, gtk_3_22 ]
 
 plugs:
   digger-home:
