@@ -1,5 +1,5 @@
 name: digger-classic
-base: core20
+base: core18
 summary: Classic Digger from 1983
 description: |
   The remastered version of the classic Digger game 
