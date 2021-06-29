@@ -1,0 +1,20 @@
+name: digger-classic
+summary: Classic Digger from 1983
+description: |
+  The remastered version of the classic Digger game 
+  from 1983 for modern Linux systems for you to enjoy!
+version: '1.0'
+confinement: strict
+
+apps:
+  digger:
+    command: digger
+
+parts:
+  digger:
+    plugin: go
+    source: ./digger
+
+plugs:
+  digger-home:
+    interface: home
