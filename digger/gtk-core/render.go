@@ -17,6 +17,11 @@ func NewGtkRender(dig diggerapi.DiggerRender) *GtkRender {
 }
 
 func (q *GtkRender) OnDrawn(da *gtk.DrawingArea, g *cairo.Context) bool {
+
+	g.SetSourceRGB(0, 0, 0)
+	g.Rectangle(0, 0, 3840, 2160)
+	g.Fill()
+
 	g.Scale(4, 4)
 
 	var pc = q.digger.GetPc()

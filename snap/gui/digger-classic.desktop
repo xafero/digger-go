@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Digger Classic
+Comment=Play the classic Digger arcade game
+Keywords=game;
+Version=1.0
+Exec=digger-classic
+Terminal=false
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=${SNAP}/meta/gui/digger-classic.png
